@@ -10,8 +10,8 @@ Helpers for convenient error throwing.
 - [Usage](#usage)
 - [API](#api)
   * [throwError(message)](#throwerrormessage)
-  * [throwAsync(message)](#throwasyncmessage)
   * [throwIf(condition, message)](#throwifcondition-message)
+  * [throwAsync(message)](#throwasyncmessage)
   * [ensureError(message) ⇒ Error](#ensureerrormessage-%E2%87%92-error)
 - [License](#license)
 <!-- AUTO-GENERATED-CONTENT:END -->
@@ -56,23 +56,6 @@ setTimeout(() => throw new Error('Error'), 1000); // => SyntaxError: Unexpected 
 const foo = value || throwError('Error');         // => OK
 setTimeout(() => throwError('Error'), 1000);      // => OK
 ```
-<a name="throwAsync"></a>
-
-### throwAsync(message)
-Throws error in next event loop tick.
-Useful to throw error out of promise chain.
-
-**Kind**: global function  
-**Params**
-
-- message <code>String</code> | <code>Error</code>
-
-**Example**  
-```js
-Promise.resolve()
-  .then(...)
-  .catch(e => throwAsync(e));
-```
 <a name="throwIf"></a>
 
 ### throwIf(condition, message)
@@ -96,6 +79,23 @@ throwIf(foo > 10, 'my error');
 
 // Error message can be function to get calculated lazily:
 throwIf(condition, () => `Incorrect data: ${JSON.stringify(data)}`);
+```
+<a name="throwAsync"></a>
+
+### throwAsync(message)
+Throws error in next event loop tick.
+Useful to throw error out of promise chain.
+
+**Kind**: global function  
+**Params**
+
+- message <code>String</code> | <code>Error</code>
+
+**Example**  
+```js
+Promise.resolve()
+  .then(...)
+  .catch(e => throwAsync(e));
 ```
 <a name="ensureError"></a>
 
