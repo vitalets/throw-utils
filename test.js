@@ -23,9 +23,10 @@ test('throwAsync', t => {
 });
 
 test('toError', t => {
-  t.plan(4);
+  t.plan(5);
   t.ok(toError('Err') instanceof Error);
   t.ok(toError(new Error('Err')) instanceof Error);
   t.ok(toError(null) instanceof Error);
   t.ok(toError(1) instanceof Error);
+  t.ok(toError([1, 2]) instanceof Error);
 });

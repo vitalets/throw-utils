@@ -16,7 +16,7 @@ exports.throwError = function (message) {
 };
 
 /**
- * Conditionally throws error. Convenient replacement of 'if...throw' block with one-liner:
+ * Conditionally throws error. Convenient replacement of `if...throw` block with one-liner:
  *
  * @param {*} condition
  * @param {String|Error|Function} message
@@ -56,11 +56,19 @@ exports.throwAsync = function (message) {
 };
 
 /**
- * If message is string converts it to Error, otherwise returns Error.
+ * Converts anything to Error.
  *
  * @param {String|Error} message
  * @returns {Error}
  */
 exports.toError = function (message) {
-  return message && typeof message === 'object' ? message : new Error(message);
+  if (Array.isArray(message)) {
+    message = message.join();
+  }
+
+  if (message && typeof message === 'object') {
+    return message;
+  }
+
+  return new Error(message);
 };
