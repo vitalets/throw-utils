@@ -12,7 +12,7 @@
  * setTimeout(() => throwError('Error'), 1000);      // => OK
  */
 exports.throwError = function (message) {
-  throw exports.ensureError(message);
+  throw exports.toError(message);
 };
 
 /**
@@ -61,6 +61,6 @@ exports.throwAsync = function (message) {
  * @param {String|Error} message
  * @returns {Error}
  */
-exports.ensureError = function (message) {
-  return typeof message === 'string' ? new Error(message) : message;
+exports.toError = function (message) {
+  return message && typeof message === 'object' ? message : new Error(message);
 };

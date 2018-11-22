@@ -1,5 +1,5 @@
 const test = require('tape');
-const {throwError, throwIf, throwAsync, ensureError} = require('.');
+const {throwError, throwIf, throwAsync, toError} = require('.');
 
 test('throwError', t => {
   t.plan(1);
@@ -22,8 +22,10 @@ test('throwAsync', t => {
   process.once('uncaughtException', e => t.equal(e.message, 'Err'));
 });
 
-test('ensureError', t => {
-  t.plan(2);
-  t.ok(ensureError('Err') instanceof Error);
-  t.ok(ensureError(new Error('Err')) instanceof Error);
+test('toError', t => {
+  t.plan(4);
+  t.ok(toError('Err') instanceof Error);
+  t.ok(toError(new Error('Err')) instanceof Error);
+  t.ok(toError(null) instanceof Error);
+  t.ok(toError(1) instanceof Error);
 });

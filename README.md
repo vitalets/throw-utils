@@ -3,7 +3,7 @@
 [![npm](https://img.shields.io/npm/v/throw-utils.svg)](https://www.npmjs.com/package/throw-utils)
 [![license](https://img.shields.io/npm/l/throw-utils.svg)](https://www.npmjs.com/package/throw-utils)
 
-Helpers for convenient error throwing.
+Helpers for error throwing.
 
 <!-- AUTO-GENERATED-CONTENT:START (TOC) -->
 - [Installation](#installation)
@@ -12,7 +12,7 @@ Helpers for convenient error throwing.
   * [throwError(message)](#throwerrormessage)
   * [throwIf(condition, message)](#throwifcondition-message)
   * [throwAsync(message)](#throwasyncmessage)
-  * [ensureError(message) ⇒ Error](#ensureerrormessage-%E2%87%92-error)
+  * [toError(message) ⇒ Error](#toerrormessage-%E2%87%92-error)
 - [License](#license)
 <!-- AUTO-GENERATED-CONTENT:END -->
 
@@ -97,9 +97,9 @@ Promise.resolve()
   .then(...)
   .catch(e => throwAsync(e));
 ```
-<a name="ensureError"></a>
+<a name="toError"></a>
 
-### ensureError(message) ⇒ <code>Error</code>
+### toError(message) ⇒ <code>Error</code>
 If message is string converts it to Error, otherwise returns Error.
 
 **Kind**: global function  

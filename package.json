@@ -1,7 +1,7 @@
 {
   "name": "throw-utils",
   "version": "0.1.0",
-  "description": "Helpers for convenient error throwing",
+  "description": "Helpers for error throwing",
   "author": {
     "name": "Vitaliy Potapov",
     "email": "noginsk@rambler.ru"
@@ -24,7 +24,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "run-s code test",
+      "pre-commit": "lint-staged && npm t",
       "pre-push": "npm t"
     }
   },
