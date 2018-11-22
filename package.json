@@ -18,7 +18,7 @@
     "ci": "run-s code test",
     "prerelease": "run-s code test docs docs:commit",
     "postrelease": "git push --follow-tags --no-verify",
-    "release": "npm version $VER && npm publish",
+    "release": "npm version $VER && npm publish --access public",
     "release-patch": "VER=patch npm run release",
     "release-minor": "VER=minor npm run release"
   },
