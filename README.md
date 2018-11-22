@@ -59,7 +59,7 @@ setTimeout(() => throwError('Error'), 1000);      // => OK
 <a name="throwIf"></a>
 
 ### throwIf(condition, message)
-Conditionally throws error. Convenient replacement of 'if...throw' block with one-liner:
+Conditionally throws error. Convenient replacement of `if...throw` block with one-liner:
 
 **Kind**: global function  
 **Params**
@@ -100,7 +100,7 @@ Promise.resolve()
 <a name="toError"></a>
 
 ### toError(message) ⇒ <code>Error</code>
-If message is string converts it to Error, otherwise returns Error.
+Converts anything to Error.
 
 **Kind**: global function  
 **Params**
