@@ -1,4 +1,9 @@
 /**
+ * IMPORTANT: There is some copy-paste parts in this file.
+ * It is needed to avoid extra functions and keep error's stack trace clean.
+ */
+
+/**
  * Throws new error. Allows simple usage of `throw` in expressions and arrow functions.
  *
  * @param {String|Error} message
@@ -11,8 +16,10 @@
  * const foo = value || throwError('Error');         // => OK
  * setTimeout(() => throwError('Error'), 1000);      // => OK
  */
-exports.throwError = function (message) {
-  throw exports.toError(message);
+exports.throwError = message => {
+  message = Array.isArray(message) ? message.join() : message;
+  const error = (message && typeof message === 'object') ? message : new Error(message);
+  throw error;
 };
 
 /**
@@ -33,10 +40,12 @@ exports.throwError = function (message) {
  * // Error message can be function to get calculated lazily:
  * throwIf(condition, () => `Incorrect data: ${JSON.stringify(data)}`);
  */
-exports.throwIf = function (condition, message) {
+exports.throwIf = (condition, message) => {
   if (condition) {
     message = typeof message === 'function' ? message() : message;
-    exports.throwError(message);
+    message = Array.isArray(message) ? message.join() : message;
+    const error = (message && typeof message === 'object') ? message : new Error(message);
+    throw error;
   }
 };
 
@@ -51,8 +60,12 @@ exports.throwIf = function (condition, message) {
  *   .then(...)
  *   .catch(e => throwAsync(e));
  */
-exports.throwAsync = function (message) {
-  setTimeout(() => exports.throwError(message), 0);
+exports.throwAsync = message => {
+  setTimeout(() => {
+    message = Array.isArray(message) ? message.join() : message;
+    const error = (message && typeof message === 'object') ? message : new Error(message);
+    throw error;
+  }, 0);
 };
 
 /**
@@ -61,14 +74,8 @@ exports.throwAsync = function (message) {
  * @param {String|Error} message
  * @returns {Error}
  */
-exports.toError = function (message) {
-  if (Array.isArray(message)) {
-    message = message.join();
-  }
-
-  if (message && typeof message === 'object') {
-    return message;
-  }
-
-  return new Error(message);
+exports.toError = message => {
+  message = Array.isArray(message) ? message.join() : message;
+  const error = (message && typeof message === 'object') ? message : new Error(message);
+  return error;
 };

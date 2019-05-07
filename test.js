@@ -30,3 +30,17 @@ test('toError', t => {
   t.ok(toError(1) instanceof Error);
   t.ok(toError([1, 2]) instanceof Error);
 });
+
+test('stacktrace', t => {
+  t.plan(1);
+  const fn = () => throwIf(true, new Error('Err'));
+  try {
+    fn();
+  } catch (e) {
+    const stack = e.stack.split('\n');
+    // console.log(e.stack);
+    t.ok(stack[1].indexOf('at fn') >= 0);
+    return;
+  }
+  t.fail('Did not throw');
+});
