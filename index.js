@@ -1,12 +1,12 @@
 /**
  * IMPORTANT: There is some copy-paste parts in this file.
- * It is needed to avoid extra functions and keep error's stack trace clean.
+ * It is needed to avoid extra lines in stacktrace.
  */
 
 /**
  * Throws new error. Allows simple usage of `throw` in expressions and arrow functions.
  *
- * @param {String|Error} message
+ * @param {String|Error} error
  * @example
  * // usage in expression
  * const foo = value || throwError('Error');
@@ -14,9 +14,9 @@
  * // usage in arrow function
  * setTimeout(() => throwError('Error'), 1000);
  */
-exports.throwError = message => {
-  message = Array.isArray(message) ? message.join() : message;
-  const error = (message && typeof message === 'object') ? message : new Error(message);
+exports.throwError = error => {
+  error = Array.isArray(error) ? error.join() : error;
+  error = (error && typeof error === 'object') ? error : new Error(error);
   throw error;
 };
 
@@ -24,18 +24,18 @@ exports.throwError = message => {
  * Conditionally throws error. Convenient replacement of `if...throw` block with one-liner:
  *
  * @param {*} condition
- * @param {String|Error|Function} message
+ * @param {String|Error|Function} error
  *
  * @example
  * throwIf(foo > 10, 'my error');
  * throwIf(foo > 10, new Error('my error'));
  * throwIf(foo > 10, () => `my error: ${JSON.stringify(data)}`); // lazy calculated Error
  */
-exports.throwIf = (condition, message) => {
+exports.throwIf = (condition, error) => {
   if (condition) {
-    message = typeof message === 'function' ? message() : message;
-    message = Array.isArray(message) ? message.join() : message;
-    const error = (message && typeof message === 'object') ? message : new Error(message);
+    error = typeof error === 'function' ? error() : error;
+    error = Array.isArray(error) ? error.join() : error;
+    error = (error && typeof error === 'object') ? error : new Error(error);
     throw error;
   }
 };
@@ -44,17 +44,17 @@ exports.throwIf = (condition, message) => {
  * Throws error in next event loop tick.
  * Useful to throw error out of promise chain.
  *
- * @param {String|Error} message
+ * @param {String|Error} error
  *
  * @example
  * Promise.resolve()
  *   .then(...)
  *   .catch(e => throwAsync(e));
  */
-exports.throwAsync = message => {
+exports.throwAsync = error => {
   setTimeout(() => {
-    message = Array.isArray(message) ? message.join() : message;
-    const error = (message && typeof message === 'object') ? message : new Error(message);
+    error = Array.isArray(error) ? error.join() : error;
+    error = (error && typeof error === 'object') ? error : new Error(error);
     throw error;
   }, 0);
 };
@@ -62,11 +62,11 @@ exports.throwAsync = message => {
 /**
  * Converts anything to Error.
  *
- * @param {String|Error} message
+ * @param {String|Error} value
  * @returns {Error}
  */
-exports.toError = message => {
-  message = Array.isArray(message) ? message.join() : message;
-  const error = (message && typeof message === 'object') ? message : new Error(message);
+exports.toError = value => {
+  value = Array.isArray(value) ? value.join() : value;
+  const error = (value && typeof value === 'object') ? value : new Error(value);
   return error;
 };

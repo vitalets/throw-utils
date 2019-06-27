@@ -9,10 +9,10 @@ Helpers for error throwing with clean syntax.
 - [Installation](#installation)
 - [Usage](#usage)
 - [API](#api)
-  * [throwError(message)](#throwerrormessage)
-  * [throwIf(condition, message)](#throwifcondition-message)
-  * [throwAsync(message)](#throwasyncmessage)
-  * [toError(message) ⇒ Error](#toerrormessage-%E2%87%92-error)
+  * [throwError(error)](#throwerrorerror)
+  * [throwIf(condition, error)](#throwifcondition-error)
+  * [throwAsync(error)](#throwasyncerror)
+  * [toError(value) ⇒ Error](#toerrorvalue-%E2%87%92-error)
 - [License](#license)
 <!-- AUTO-GENERATED-CONTENT:END -->
 
@@ -72,13 +72,13 @@ npm i throw-utils
 <!-- AUTO-GENERATED-CONTENT:START (API) -->
 <a name="throwError"></a>
 
-### throwError(message)
+### throwError(error)
 Throws new error. Allows simple usage of `throw` in expressions and arrow functions.
 
 **Kind**: global function  
 **Params**
 
-- message <code>String</code> | <code>Error</code>
+- error <code>String</code> | <code>Error</code>
 
 **Example**  
 ```js
@@ -90,14 +90,14 @@ setTimeout(() => throwError('Error'), 1000);
 ```
 <a name="throwIf"></a>
 
-### throwIf(condition, message)
+### throwIf(condition, error)
 Conditionally throws error. Convenient replacement of `if...throw` block with one-liner:
 
 **Kind**: global function  
 **Params**
 
 - condition <code>\*</code>
-- message <code>String</code> | <code>Error</code> | <code>function</code>
+- error <code>String</code> | <code>Error</code> | <code>function</code>
 
 **Example**  
 ```js
@@ -107,14 +107,14 @@ throwIf(foo > 10, () => `my error: ${JSON.stringify(data)}`); // lazy calculated
 ```
 <a name="throwAsync"></a>
 
-### throwAsync(message)
+### throwAsync(error)
 Throws error in next event loop tick.
 Useful to throw error out of promise chain.
 
 **Kind**: global function  
 **Params**
 
-- message <code>String</code> | <code>Error</code>
+- error <code>String</code> | <code>Error</code>
 
 **Example**  
 ```js
@@ -124,13 +124,13 @@ Promise.resolve()
 ```
 <a name="toError"></a>
 
-### toError(message) ⇒ <code>Error</code>
+### toError(value) ⇒ <code>Error</code>
 Converts anything to Error.
 
 **Kind**: global function  
 **Params**
 
-- message <code>String</code> | <code>Error</code>
+- value <code>String</code> | <code>Error</code>
 
 
 <!-- AUTO-GENERATED-CONTENT:END -->
