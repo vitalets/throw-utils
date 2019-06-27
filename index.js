@@ -8,13 +8,11 @@
  *
  * @param {String|Error} message
  * @example
- * // Before:
- * const foo = value || throw new Error('Error');    // => SyntaxError: Unexpected token throw
- * setTimeout(() => throw new Error('Error'), 1000); // => SyntaxError: Unexpected token throw
+ * // usage in expression
+ * const foo = value || throwError('Error');
  *
- * // After:
- * const foo = value || throwError('Error');         // => OK
- * setTimeout(() => throwError('Error'), 1000);      // => OK
+ * // usage in arrow function
+ * setTimeout(() => throwError('Error'), 1000);
  */
 exports.throwError = message => {
   message = Array.isArray(message) ? message.join() : message;
@@ -29,16 +27,9 @@ exports.throwError = message => {
  * @param {String|Error|Function} message
  *
  * @example
- * // Before:
- * if (foo > 10) {
- *     throw new Error('my error');
- * }
- *
- * // After:
  * throwIf(foo > 10, 'my error');
- *
- * // Error message can be function to get calculated lazily:
- * throwIf(condition, () => `Incorrect data: ${JSON.stringify(data)}`);
+ * throwIf(foo > 10, new Error('my error'));
+ * throwIf(foo > 10, () => `my error: ${JSON.stringify(data)}`); // lazy calculated Error
  */
 exports.throwIf = (condition, message) => {
   if (condition) {

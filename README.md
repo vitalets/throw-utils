@@ -3,7 +3,7 @@
 [![npm](https://img.shields.io/npm/v/throw-utils.svg)](https://www.npmjs.com/package/throw-utils)
 [![license](https://img.shields.io/npm/l/throw-utils.svg)](https://www.npmjs.com/package/throw-utils)
 
-Helpers for error throwing.
+Helpers for error throwing with clean syntax.
 
 <!-- AUTO-GENERATED-CONTENT:START (TOC) -->
 - [Installation](#installation)
@@ -82,13 +82,11 @@ Throws new error. Allows simple usage of `throw` in expressions and arrow functi
 
 **Example**  
 ```js
-// Before:
-const foo = value || throw new Error('Error');    // => SyntaxError: Unexpected token throw
-setTimeout(() => throw new Error('Error'), 1000); // => SyntaxError: Unexpected token throw
+// usage in expression
+const foo = value || throwError('Error');
 
-// After:
-const foo = value || throwError('Error');         // => OK
-setTimeout(() => throwError('Error'), 1000);      // => OK
+// usage in arrow function
+setTimeout(() => throwError('Error'), 1000);
 ```
 <a name="throwIf"></a>
 
@@ -103,16 +101,9 @@ Conditionally throws error. Convenient replacement of `if...throw` block with on
 
 **Example**  
 ```js
-// Before:
-if (foo > 10) {
-    throw new Error('my error');
-}
-
-// After:
 throwIf(foo > 10, 'my error');
-
-// Error message can be function to get calculated lazily:
-throwIf(condition, () => `Incorrect data: ${JSON.stringify(data)}`);
+throwIf(foo > 10, new Error('my error'));
+throwIf(foo > 10, () => `my error: ${JSON.stringify(data)}`); // lazy calculated Error
 ```
 <a name="throwAsync"></a>
 
