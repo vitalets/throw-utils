@@ -24,15 +24,49 @@ npm i throw-utils
 ```
 
 ## Usage
-```js
-const {throwError, throwIf} = require('throw-utils');
+   
+1. Return value or throw error:
+   ```diff
+   const {throwError} = require('throw-utils');
 
-// throw error in arrow function one-liner:
-const fn = () => throwError('Error');
+   function foo() {
+   -  if (!result) {
+   -    throw new Error('MyError');
+   -  }
+   -  return result;
+     
+   +  return result || throwError('MyError');
+   }
+   ```   
 
-// throw error in conditional one-liner:
-throwIf(foo > 0, 'foo should be greater than zero!');
-```
+2. Throw error in arrow function one-liner:
+   ```diff
+   const {throwError} = require('throw-utils');
+
+   - const fn = () => { throw new Error('Error'); };
+   + const fn = () => throwError('Error');
+   ```
+
+3. Throw error in conditional one-liner:
+   ```diff
+   const {throwIf} = require('throw-utils');
+
+   - if (foo > 0) {
+   -   throw new Error('foo should be greater than zero!');
+   - }
+
+   + throwIf(foo > 0, 'foo should be greater than zero!');
+   ```
+4. Throw error in next tick:
+   ```diff
+   const {throwAsync} = require('throw-utils');
+
+   - setTimeout(() => {
+   -   throw new Error('MyError');
+   - }, 0);
+
+   + throwAsync('MyError');
+   ```   
 
 ## API
 <!-- AUTO-GENERATED-CONTENT:START (API) -->
