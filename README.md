@@ -3,7 +3,7 @@
 [![npm](https://img.shields.io/npm/v/throw-utils.svg)](https://www.npmjs.com/package/throw-utils)
 [![license](https://img.shields.io/npm/l/throw-utils.svg)](https://www.npmjs.com/package/throw-utils)
 
-Helpers for error throwing with clean syntax.
+One-liner helpers for error throwing.
 
 <!-- AUTO-GENERATED-CONTENT:START (TOC) -->
 - [Installation](#installation)
@@ -16,56 +16,66 @@ Helpers for error throwing with clean syntax.
 - [License](#license)
 <!-- AUTO-GENERATED-CONTENT:END -->
 
-
-
 ## Installation
 ```bash
 npm i throw-utils
 ```
 
 ## Usage
-   
-1. Return value or throw error:
-   ```diff
-   const {throwError} = require('throw-utils');
 
-   function foo() {
-   -  if (!result) {
-   -    throw new Error('MyError');
-   -  }
-   -  return result;
-     
-   +  return result || throwError('MyError');
-   }
-   ```   
+1. Conveniently return value or throw error if value is empty:
+   ```diff
+   - function foo() {
+   -   if (result) {
+   -     return result;
+   -   } else {
+   -     throw new Error('Empty result');
+   -   }
+   - }
+
+   + const { throwError } = require('throw-utils');
+   +      
+   + function foo() {
+   +   return result || throwError('Empty result');
+   + }   
+   ```
 
 2. Throw error in arrow function one-liner:
    ```diff
-   const {throwError} = require('throw-utils');
-
-   - const fn = () => { throw new Error('Error'); };
-   + const fn = () => throwError('Error');
+   - const fn = () => { throw new Error('foo'); };
+   
+   + const fn = () => throwError('foo');
    ```
 
 3. Throw error in conditional one-liner:
    ```diff
-   const {throwIf} = require('throw-utils');
-
-   - if (foo > 0) {
-   -   throw new Error('foo should be greater than zero!');
-   - }
-
-   + throwIf(foo > 0, 'foo should be greater than zero!');
+   - function foo(a, b) {
+   -   if (!a) {
+   -     throw new Error('Parameter a is required.');
+   -   }
+   -   if (!b) {
+   -     throw new Error('Parameter b is required.');
+   -   }
+   - }   
+   
+   + const { throwIf } = require('throw-utils');
+   +
+   + function foo(a, b) {
+   +   throwIf(!a, 'Parameter a is required.');
+   +   throwIf(!b, 'Parameter b is required.');
+   + }   
    ```
+   
 4. Throw error in next tick:
    ```diff
-   const {throwAsync} = require('throw-utils');
-
    - setTimeout(() => {
-   -   throw new Error('MyError');
+   -   throw new Error('foo');
    - }, 0);
 
-   + throwAsync('MyError');
+   
+   + const { throwAsync } = require('throw-utils');
+   +
+   + throwAsync('foo');
    ```   
 
 ## API
@@ -82,6 +92,8 @@ Throws new error. Allows simple usage of `throw` in expressions and arrow functi
 
 **Example**  
 ```js
+const { throwError } = require('throw-utils');
+
 // usage in expression
 const foo = value || throwError('Error');
 
@@ -101,6 +113,8 @@ Conditionally throws error. Convenient replacement of `if...throw` block with on
 
 **Example**  
 ```js
+const { throwIf } = require('throw-utils');
+
 throwIf(foo > 10, 'my error');
 throwIf(foo > 10, new Error('my error'));
 throwIf(foo > 10, () => `my error: ${JSON.stringify(data)}`); // lazy calculated Error
@@ -118,6 +132,8 @@ Useful to throw error out of promise chain.
 
 **Example**  
 ```js
+const { throwAsync } = require('throw-utils');
+
 Promise.resolve()
   .then(...)
   .catch(e => throwAsync(e));

@@ -8,6 +8,8 @@
  *
  * @param {String|Error} error
  * @example
+ * const { throwError } = require('throw-utils');
+ *
  * // usage in expression
  * const foo = value || throwError('Error');
  *
@@ -27,6 +29,8 @@ exports.throwError = error => {
  * @param {String|Error|Function} error
  *
  * @example
+ * const { throwIf } = require('throw-utils');
+ *
  * throwIf(foo > 10, 'my error');
  * throwIf(foo > 10, new Error('my error'));
  * throwIf(foo > 10, () => `my error: ${JSON.stringify(data)}`); // lazy calculated Error
@@ -47,6 +51,8 @@ exports.throwIf = (condition, error) => {
  * @param {String|Error} error
  *
  * @example
+ * const { throwAsync } = require('throw-utils');
+ *
  * Promise.resolve()
  *   .then(...)
  *   .catch(e => throwAsync(e));
