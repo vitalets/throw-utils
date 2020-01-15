@@ -4,7 +4,7 @@
 [![npm](https://img.shields.io/npm/v/throw-utils.svg)](https://www.npmjs.com/package/throw-utils)
 [![license](https://img.shields.io/npm/l/throw-utils.svg)](https://www.npmjs.com/package/throw-utils)
 
-One-liner helpers for error throwing.
+One-liner helpers for convenient error throwing.
 
 <!-- AUTO-GENERATED-CONTENT:START (TOC) -->
 - [Installation](#installation)
@@ -24,7 +24,7 @@ npm i throw-utils
 
 ## Usecases
 
-1. Conveniently return value or throw error if value is empty:
+1. Return value or throw error if value is empty:
    ```diff
    const { throwError } = require('throw-utils');
    
