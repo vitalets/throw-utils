@@ -20,7 +20,7 @@
     "README.md"
   ],
   "scripts": {
-    "lint": "eslint src ",
+    "lint": "eslint src test",
     "test": "tape test/test.js",
     "docs": "md-magic README.md",
     "docs:commit": "git add -A README.md && (git diff-index --quiet HEAD -- README.md || git commit -m'docs' --no-verify)",
