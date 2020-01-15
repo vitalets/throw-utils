@@ -16,55 +16,59 @@ Helpers for error throwing with clean syntax.
 - [License](#license)
 <!-- AUTO-GENERATED-CONTENT:END -->
 
-
-
 ## Installation
 ```bash
 npm i throw-utils
 ```
 
 ## Usage
-   
-1. Return value or throw error:
+
+1. Conveniently return value or throw error if value is empty:
    ```diff
-   const {throwError} = require('throw-utils');
+   - function foo() {
+   -   if (!result) {
+   -     throw new Error('MyError');
+   -   }
+   -   return result;
+   - }
 
-   function foo() {
-   -  if (!result) {
-   -    throw new Error('MyError');
-   -  }
-   -  return result;
-     
-   +  return result || throwError('MyError');
-   }
-   ```   
+   + const { throwError } = require('throw-utils');
+   +      
+   + function foo() {
+   +   return result || throwError('MyError');
+   + }   
+   ```
 
-2. Throw error in arrow function one-liner:
+2. Simpler arrow function one-liner throwing error:
    ```diff
-   const {throwError} = require('throw-utils');
-
    - const fn = () => { throw new Error('Error'); };
    + const fn = () => throwError('Error');
    ```
 
 3. Throw error in conditional one-liner:
    ```diff
-   const {throwIf} = require('throw-utils');
-
-   - if (foo > 0) {
-   -   throw new Error('foo should be greater than zero!');
-   - }
-
-   + throwIf(foo > 0, 'foo should be greater than zero!');
+   - function foo(x) {
+   -   if (!x) {
+   -     throw new Error('Parameter x is required.');
+   -   }
+   - }   
+   
+   + const { throwIf } = require('throw-utils');
+   +
+   + function foo(x) {
+   +   throwIf(!x, 'Parameter x is required.');
+   + }   
    ```
+   
 4. Throw error in next tick:
    ```diff
-   const {throwAsync} = require('throw-utils');
-
    - setTimeout(() => {
    -   throw new Error('MyError');
    - }, 0);
 
+   
+   + const { throwAsync } = require('throw-utils');
+   +
    + throwAsync('MyError');
    ```   
 
