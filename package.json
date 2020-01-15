@@ -24,7 +24,6 @@
     "test": "tape test/test.js",
     "docs": "md-magic README.md",
     "docs:commit": "git add -A README.md && (git diff-index --quiet HEAD -- README.md || git commit -m'docs' --no-verify)",
-    "ci": "run-s lint test",
     "prerelease": "run-s lint test docs docs:commit",
     "postrelease": "git push --follow-tags --no-verify",
     "release": "npm version $VER && npm publish",
