@@ -1,5 +1,5 @@
 const test = require('tape');
-const {throwError, throwIf, throwAsync, toError} = require('.');
+const {throwError, throwIf, throwAsync, toError} = require('../src');
 
 test('throwError', t => {
   t.plan(1);

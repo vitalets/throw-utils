@@ -10,20 +10,24 @@
     "type": "git",
     "url": "git://github.com/vitalets/throw-utils.git"
   },
-  "main": "./index.js",
+  "main": "./src/index.js",
   "exports": {
-    ".": "./index.js",
-    "./esm": "./index.mjs"
+    ".": "./src/index.js",
+    "./esm": "./src/index.mjs"
   },
+  "files": [
+    "src/",
+    "README.md"
+  ],
   "scripts": {
-    "code": "eslint .",
-    "test": "tape test.js",
+    "lint": "eslint src ",
+    "test": "tape test/test.js",
     "docs": "md-magic README.md",
     "docs:commit": "git add -A README.md && (git diff-index --quiet HEAD -- README.md || git commit -m'docs' --no-verify)",
-    "ci": "run-s code test",
-    "prerelease": "run-s code test docs docs:commit",
+    "ci": "run-s lint test",
+    "prerelease": "run-s lint test docs docs:commit",
     "postrelease": "git push --follow-tags --no-verify",
-    "release": "npm version $VER && npm publish --access public",
+    "release": "npm version $VER && npm publish",
     "release-patch": "VER=patch npm run release",
     "release-minor": "VER=minor npm run release"
   },
