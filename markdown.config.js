@@ -4,7 +4,7 @@ module.exports = {
   transforms: {
     API() {
       return jsdoc2md.renderSync({
-        files: 'index.js',
+        files: 'src/index.js',
         'heading-depth': 3,
         'global-index-format': 'none',
         'param-list-format': 'list',

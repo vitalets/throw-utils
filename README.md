@@ -1,5 +1,6 @@
 # throw-utils
-[![Build Status](https://travis-ci.org/vitalets/throw-utils.svg?branch=master)](https://travis-ci.org/vitalets/throw-utils)
+
+[![Actions Status](https://github.com/vitalets/throw-utils/workflows/autotests/badge.svg)](https://github.com/vitalets/throw-utils/actions)
 [![npm](https://img.shields.io/npm/v/throw-utils.svg)](https://www.npmjs.com/package/throw-utils)
 [![license](https://img.shields.io/npm/l/throw-utils.svg)](https://www.npmjs.com/package/throw-utils)
 
@@ -7,7 +8,7 @@ One-liner helpers for error throwing.
 
 <!-- AUTO-GENERATED-CONTENT:START (TOC) -->
 - [Installation](#installation)
-- [Usage](#usage)
+- [Usecases](#usecases)
 - [API](#api)
   * [throwError(error)](#throwerrorerror)
   * [throwIf(condition, error)](#throwifcondition-error)
@@ -21,7 +22,7 @@ One-liner helpers for error throwing.
 npm i throw-utils
 ```
 
-## Usage
+## Usecases
 
 1. Conveniently return value or throw error if value is empty:
    ```diff
