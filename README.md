@@ -25,19 +25,19 @@ npm i throw-utils
 
 1. Conveniently return value or throw error if value is empty:
    ```diff
-   - function foo() {
-   -   if (result) {
-   -     return result;
-   -   } else {
-   -     throw new Error('Empty result');
-   -   }
+   const { throwError } = require('throw-utils');
+   
+   function foo() {
+     // ...
+    
+   - if (result) {
+   -   return result;
+   - } else {
+   -   throw new Error('Empty result');
    - }
-
-   + const { throwError } = require('throw-utils');
-   +      
-   + function foo() {
-   +   return result || throwError('Empty result');
-   + }   
+    
+   + return result || throwError('Empty result');
+   }
    ```
 
 2. Throw error in arrow function one-liner:
@@ -49,32 +49,29 @@ npm i throw-utils
 
 3. Throw error in conditional one-liner:
    ```diff
-   - function foo(a, b) {
-   -   if (!a) {
-   -     throw new Error('Parameter a is required.');
-   -   }
-   -   if (!b) {
-   -     throw new Error('Parameter b is required.');
-   -   }
-   - }   
+   const { throwIf } = require('throw-utils');
    
-   + const { throwIf } = require('throw-utils');
-   +
-   + function foo(a, b) {
-   +   throwIf(!a, 'Parameter a is required.');
-   +   throwIf(!b, 'Parameter b is required.');
-   + }   
+   function foo(a, b) {
+   - if (!a) {
+   -   throw new Error('Parameter a is required.');
+   - }
+   - if (!b) {
+   -   throw new Error('Parameter b is required.');
+   - }
+   
+   + throwIf(!a, 'Parameter a is required.');
+   + throwIf(!b, 'Parameter b is required.');
+   }   
    ```
    
 4. Throw error in next tick:
    ```diff
+   const { throwAsync } = require('throw-utils');
+   
    - setTimeout(() => {
    -   throw new Error('foo');
    - }, 0);
 
-   
-   + const { throwAsync } = require('throw-utils');
-   +
    + throwAsync('foo');
    ```   
 
