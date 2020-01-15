@@ -10,6 +10,11 @@
     "type": "git",
     "url": "git://github.com/vitalets/throw-utils.git"
   },
+  "main": "./index.js",
+  "exports": {
+    ".": "./index.js",
+    "./esm": "./index.mjs"
+  },
   "scripts": {
     "code": "eslint .",
     "test": "tape test.js",
