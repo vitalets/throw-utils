@@ -12,7 +12,7 @@
   },
   "main": "./src/index.js",
   "exports": {
-    "default": "./src/index.js",
+    "require": "./src/index.js",
     "import": "./src/index.mjs"
   },
   "files": [
