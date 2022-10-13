@@ -4,11 +4,11 @@
 [![npm](https://img.shields.io/npm/v/throw-utils.svg)](https://www.npmjs.com/package/throw-utils)
 [![license](https://img.shields.io/npm/l/throw-utils.svg)](https://www.npmjs.com/package/throw-utils)
 
-One-liner helpers for convenient error throwing.
+Helpers for error throwing.
 
 <!-- AUTO-GENERATED-CONTENT:START (TOC) -->
 - [Installation](#installation)
-- [Usecases](#usecases)
+- [Use Cases](#use-cases)
 - [API](#api)
   * [throwError(error)](#throwerrorerror)
   * [throwIf(condition, error)](#throwifcondition-error)
@@ -22,7 +22,7 @@ One-liner helpers for convenient error throwing.
 npm i throw-utils
 ```
 
-## Usecases
+## Use Cases
 
 1. Return value or throw error if value is empty:
    ```diff
@@ -52,16 +52,12 @@ npm i throw-utils
    ```diff
    const { throwIf } = require('throw-utils');
    
-   function foo(a, b) {
+   function foo(a) {
    - if (!a) {
    -   throw new Error('Parameter a is required.');
    - }
-   - if (!b) {
-   -   throw new Error('Parameter b is required.');
-   - }
    
    + throwIf(!a, 'Parameter a is required.');
-   + throwIf(!b, 'Parameter b is required.');
    }   
    ```
    
