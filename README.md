@@ -41,7 +41,6 @@ npm i throw-utils
    ```diff
    const { throwIf } = require('throw-utils');
    
-   function foo(a) {
    - if (!a) {
    -   throw new Error('Parameter a is required.');
    - }
