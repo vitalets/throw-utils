@@ -4,17 +4,16 @@
 [![npm](https://img.shields.io/npm/v/throw-utils.svg)](https://www.npmjs.com/package/throw-utils)
 [![license](https://img.shields.io/npm/l/throw-utils.svg)](https://www.npmjs.com/package/throw-utils)
 
-Helpers for error throwing.
+Tiny helpers for error throwing.
 
 <!-- AUTO-GENERATED-CONTENT:START (TOC) -->
 - [throw-utils](#throw-utils)
   - [Installation](#installation)
   - [Use Cases](#use-cases)
   - [API](#api)
-    - [throwError(error)](#throwerrorerror)
-    - [throwIf(condition, error)](#throwifcondition-error)
-    - [throwAsync(error)](#throwasyncerror)
-    - [toError(value) ⇒ <code>Error</code>](#toerrorvalue--error)
+    - [throwError](#throwerror)
+    - [throwIf](#throwif)
+    - [toError](#toerror)
   - [License](#license)
 <!-- AUTO-GENERATED-CONTENT:END -->
 
@@ -25,111 +24,71 @@ npm i throw-utils
 
 ## Use Cases
 
-1. One-liner to set value or throw error if value is empty:
+1. Assign value or throw error if value is empty:
    ```diff
-   const { throwError } = require('throw-utils');
-    
+   import { throwError } from 'throw-utils';
+
    - if (!process.env.FOO) {
    -   throw new Error('FOO is not defined');
    - }
    - const foo = process.env.FOO;
-    
+
    + const foo = process.env.FOO || throwError('FOO is not defined');
    ```
 
-2. One-liner to throw error if condition is true:
+2. Return result from function or throw error if result is empty:
    ```diff
    const { throwIf } = require('throw-utils');
-   
+
+   function foo(a) {
    - if (!a) {
    -   throw new Error('Parameter a is required.');
    - }
-   
-   + throwIf(!a, 'Parameter a is required.');   
-   ```
-   
-3. Throw error in next tick:
-   ```diff
-   const { throwAsync } = require('throw-utils');
-   
-   - setTimeout(() => {
-   -   throw new Error('foo');
-   - }, 0);
+   - return result;
 
-   + throwAsync('foo');
-   ```   
+   + return result || throwError('Empty result');
+   }
+   ```
+
+3. Check function parameters in single line:
+   ```diff
+   import { throwIf } from 'throw-utils';
+
+   function f(a) {
+   - if (!a) {
+   -   throw new Error('Parameter a is required.');
+   - }
+
+   + throwIf(!a, 'Parameter a is required.');
+   }
+   ```
 
 ## API
 <!-- AUTO-GENERATED-CONTENT:START (API) -->
-<a name="throwError"></a>
+### throwError
 
-### throwError(error)
 Throws new error. Allows simple usage of `throw` in expressions and arrow functions.
 
-**Kind**: global function  
+**Kind**: global function
 **Params**
 
 - error <code>String</code> | <code>Error</code>
 
-**Example**  
-```js
-const { throwError } = require('throw-utils');
+### throwIf
 
-// usage in expression
-const foo = value || throwError('Error');
-
-// usage in arrow function
-setTimeout(() => throwError('Error'), 1000);
-```
-<a name="throwIf"></a>
-
-### throwIf(condition, error)
 Conditionally throws error. Convenient replacement of `if...throw` block with one-liner:
 
-**Kind**: global function  
-**Params**
+| Function | Type |
+| ---------- | ---------- |
+| `throwIf` | `(condition: unknown, msg: ErrorLike) => void` |
 
-- condition <code>\*</code>
-- error <code>String</code> | <code>Error</code> | <code>function</code>
+### toError
 
-**Example**  
-```js
-const { throwIf } = require('throw-utils');
-
-throwIf(foo > 10, 'my error');
-throwIf(foo > 10, new Error('my error'));
-throwIf(foo > 10, () => `my error: ${JSON.stringify(data)}`); // lazy calculated Error
-```
-<a name="throwAsync"></a>
-
-### throwAsync(error)
-Throws error in next event loop tick.
-Useful to throw error out of promise chain.
-
-**Kind**: global function  
-**Params**
-
-- error <code>String</code> | <code>Error</code>
-
-**Example**  
-```js
-const { throwAsync } = require('throw-utils');
-
-Promise.resolve()
-  .then(...)
-  .catch(e => throwAsync(e));
-```
-<a name="toError"></a>
-
-### toError(value) ⇒ <code>Error</code>
 Converts anything to Error.
 
-**Kind**: global function  
-**Params**
-
-- value <code>String</code> | <code>Error</code>
-
-
+| Function | Type |
+| ---------- | ---------- |
+| `toError` | `(msg: ErrorLike) => Error` |
 <!-- AUTO-GENERATED-CONTENT:END -->
 
 ## License

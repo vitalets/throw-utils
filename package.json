@@ -1,7 +1,47 @@
 {
   "name": "throw-utils",
-  "version": "1.2.1",
   "description": "Helpers for error throwing",
+  "version": "1.2.1",
+  "type": "module",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "files": [
+    "src",
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "prepare": "git config core.hooksPath ./.hooks",
+    "lint": "eslint src test --ext .ts",
+    "test": "mocha -n loader=ts-node/esm test/*.ts",
+    "docs": "node generate-docs.cjs",
+    "docs:commit": "git add -A README.md && (git diff-index --quiet HEAD -- README.md || git commit -m'docs' --no-verify)",
+    "build:esm": "rm -rf dist/esm && tsc -p tsconfig.build.json",
+    "build:cjs": "rm -rf dist/cjs && tsc -p tsconfig.build.cjs.json && echo '{\"type\":\"commonjs\"}' > dist/cjs/package.json",
+    "build": "npm run build:esm && npm run build:cjs",
+    "release": "run-s lint test docs docs:commit && np --yolo --no-release-draft"
+  },
+  "lint-staged": {
+    "{src,test}/**/*.ts": "eslint --ext .ts"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.0",
+    "@types/node": "^18.8.3",
+    "@typescript-eslint/eslint-plugin": "^5.39.0",
+    "@typescript-eslint/parser": "^5.39.0",
+    "eslint": "^8.25.0",
+    "eslint-plugin-mocha": "^10.1.0",
+    "lint-staged": "^13.0.3",
+    "markdown-magic": "^2.6.1",
+    "mocha": "^10.1.0",
+    "np": "^7.6.2",
+    "npm-run-all": "^4.1.3",
+    "ts-node": "^10.9.1",
+    "tsdoc-markdown": "^0.0.1",
+    "typedoc": "^0.23.17",
+    "typedoc-plugin-markdown": "^3.13.6",
+    "typescript": "^4.8.4"
+  },
   "author": {
     "name": "Vitaliy Potapov",
     "email": "noginsk@rambler.ru"
@@ -9,44 +49,6 @@
   "repository": {
     "type": "git",
     "url": "git://github.com/vitalets/throw-utils.git"
-  },
-  "main": "./src/index.js",
-  "exports": {
-    "require": "./src/index.js",
-    "import": "./src/index.mjs"
-  },
-  "files": [
-    "src/",
-    "README.md"
-  ],
-  "scripts": {
-    "lint": "eslint src test",
-    "test": "tape test/test.js",
-    "docs": "md-magic README.md",
-    "docs:commit": "git add -A README.md && (git diff-index --quiet HEAD -- README.md || git commit -m'docs' --no-verify)",
-    "prerelease": "run-s lint test docs docs:commit",
-    "postrelease": "git push --follow-tags --no-verify",
-    "release": "npm version $VER && npm publish",
-    "release-patch": "VER=patch npm run release",
-    "release-minor": "VER=minor npm run release"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged && npm t",
-      "pre-push": "npm t"
-    }
-  },
-  "lint-staged": {
-    "*.js": "eslint"
-  },
-  "devDependencies": {
-    "eslint": "^8.25.0",
-    "husky": "^4.0.9",
-    "jsdoc-to-markdown": "^7.1.1",
-    "lint-staged": "^13.0.3",
-    "markdown-magic": "^2.6.1",
-    "npm-run-all": "^4.1.3",
-    "tape": "^5.6.1"
   },
   "license": "MIT"
 }
