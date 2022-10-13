@@ -10,10 +10,10 @@ Helpers for error throwing.
 - [Installation](#installation)
 - [Use Cases](#use-cases)
 - [API](#api)
-  * [throwError(error)](#throwerrorerror)
-  * [throwIf(condition, error)](#throwifcondition-error)
-  * [throwAsync(error)](#throwasyncerror)
-  * [toError(value) ⇒ Error](#toerrorvalue-%E2%87%92-error)
+  - [throwError(error)](#throwerrorerror)
+  - [throwIf(condition, error)](#throwifcondition-error)
+  - [throwAsync(error)](#throwasyncerror)
+  - [toError(value) ⇒ <code>Error</code>](#toerrorvalue-%E2%87%92-codeerrorcode)
 - [License](#license)
 <!-- AUTO-GENERATED-CONTENT:END -->
 
@@ -24,31 +24,20 @@ npm i throw-utils
 
 ## Use Cases
 
-1. Return value or throw error if value is empty:
+1. One-liner to set value or throw error if value is empty:
    ```diff
    const { throwError } = require('throw-utils');
-   
-   function foo() {
-     // ...
     
-   - if (result) {
-   -   return result;
-   - } else {
-   -   throw new Error('Empty result');
+   - if (!process.env.FOO) {
+   -   throw new Error('FOO is not defined');
    - }
+   - const foo = process.env.FOO;
     
-   + return result || throwError('Empty result');
+   + const foo = process.env.FOO || throwError('FOO is not defined');
    }
    ```
 
-2. Throw error in arrow function one-liner:
-   ```diff
-   - const fn = () => { throw new Error('foo'); };
-   
-   + const fn = () => throwError('foo');
-   ```
-
-3. Throw error in conditional one-liner:
+2. One-liner to throw error if condition is true:
    ```diff
    const { throwIf } = require('throw-utils');
    
@@ -61,7 +50,7 @@ npm i throw-utils
    }   
    ```
    
-4. Throw error in next tick:
+3. Throw error in next tick:
    ```diff
    const { throwAsync } = require('throw-utils');
    
