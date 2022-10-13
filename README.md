@@ -7,14 +7,15 @@
 Helpers for error throwing.
 
 <!-- AUTO-GENERATED-CONTENT:START (TOC) -->
-- [Installation](#installation)
-- [Use Cases](#use-cases)
-- [API](#api)
-  - [throwError(error)](#throwerrorerror)
-  - [throwIf(condition, error)](#throwifcondition-error)
-  - [throwAsync(error)](#throwasyncerror)
-  - [toError(value) ⇒ <code>Error</code>](#toerrorvalue-%E2%87%92-codeerrorcode)
-- [License](#license)
+- [throw-utils](#throw-utils)
+  - [Installation](#installation)
+  - [Use Cases](#use-cases)
+  - [API](#api)
+    - [throwError(error)](#throwerrorerror)
+    - [throwIf(condition, error)](#throwifcondition-error)
+    - [throwAsync(error)](#throwasyncerror)
+    - [toError(value) ⇒ <code>Error</code>](#toerrorvalue--error)
+  - [License](#license)
 <!-- AUTO-GENERATED-CONTENT:END -->
 
 ## Installation
@@ -34,7 +35,6 @@ npm i throw-utils
    - const foo = process.env.FOO;
     
    + const foo = process.env.FOO || throwError('FOO is not defined');
-   }
    ```
 
 2. One-liner to throw error if condition is true:
@@ -46,8 +46,7 @@ npm i throw-utils
    -   throw new Error('Parameter a is required.');
    - }
    
-   + throwIf(!a, 'Parameter a is required.');
-   }   
+   + throwIf(!a, 'Parameter a is required.');   
    ```
    
 3. Throw error in next tick:
