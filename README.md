@@ -7,13 +7,14 @@
 Tiny helpers for error throwing.
 
 <!-- AUTO-GENERATED-CONTENT:START (TOC) -->
-- [Installation](#installation)
-- [Use Cases](#use-cases)
-- [API](#api)
-  - [throwError](#throwerror)
-  - [throwIf](#throwif)
-  - [toError](#toerror)
-- [License](#license)
+- [throw-utils](#throw-utils)
+  - [Installation](#installation)
+  - [Use Cases](#use-cases)
+  - [API](#api)
+    - [throwError](#throwerror)
+    - [throwIf](#throwif)
+    - [toError](#toerror)
+  - [License](#license)
 <!-- AUTO-GENERATED-CONTENT:END -->
 
 ## Installation
@@ -37,7 +38,7 @@ npm i throw-utils
 
 2. Return result from function or throw error if result is empty:
    ```diff
-   const { throwIf } = require('throw-utils');
+   import { throwIf } from 'throw-utils';
 
    function foo(a) {
    - if (!a) {
