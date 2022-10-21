@@ -7,14 +7,13 @@
 Tiny helpers for error throwing.
 
 <!-- AUTO-GENERATED-CONTENT:START (TOC) -->
-- [throw-utils](#throw-utils)
-  - [Installation](#installation)
-  - [Use Cases](#use-cases)
-  - [API](#api)
-    - [throwError](#throwerror)
-    - [throwIf](#throwif)
-    - [toError](#toerror)
-  - [License](#license)
+- [Installation](#installation)
+- [Use Cases](#use-cases)
+- [API](#api)
+  - [throwError](#throwerror)
+  - [throwIf](#throwif)
+  - [toError](#toerror)
+- [License](#license)
 <!-- AUTO-GENERATED-CONTENT:END -->
 
 ## Installation
