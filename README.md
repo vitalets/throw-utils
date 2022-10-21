@@ -7,14 +7,13 @@
 Tiny helpers for error throwing.
 
 <!-- AUTO-GENERATED-CONTENT:START (TOC) -->
-- [throw-utils](#throw-utils)
-  - [Installation](#installation)
-  - [Use Cases](#use-cases)
-  - [API](#api)
-    - [throwError](#throwerror)
-    - [throwIf](#throwif)
-    - [toError](#toerror)
-  - [License](#license)
+- [Installation](#installation)
+- [Use Cases](#use-cases)
+- [API](#api)
+  - [throwError](#throwerror)
+  - [throwIf](#throwif)
+  - [toError](#toerror)
+- [License](#license)
 <!-- AUTO-GENERATED-CONTENT:END -->
 
 ## Installation
@@ -69,10 +68,9 @@ npm i throw-utils
 
 Throws new error. Allows simple usage of `throw` in expressions and arrow functions.
 
-**Kind**: global function
-**Params**
-
-- error <code>String</code> | <code>Error</code>
+| Function | Type |
+| ---------- | ---------- |
+| `throwError` | `(msg: ErrorLike) => never` |
 
 ### throwIf
 
